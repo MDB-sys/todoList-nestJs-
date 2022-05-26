@@ -13,7 +13,21 @@ export class UserService {
     try {
       return this.userRepository.findAll();
     } catch (error) {
-      console.log('temus ----------------------------------', error.error);
+      console.log(error.error);
+      return error.error;
+    }
+  }
+
+  async findOne(name: string, id: number): Promise<User> {
+    try {
+      return await this.userRepository.findOne({
+        where: {
+          name,
+          id,
+        },
+      });
+    } catch (error) {
+      console.log(error);
       return error.error;
     }
   }
