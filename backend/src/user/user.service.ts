@@ -13,7 +13,7 @@ export class UserService {
     try {
       return this.userRepository.findAll();
     } catch (error) {
-      console.log(error);
+      console.log('temus ----------------------------------', error.error);
       return error.error;
     }
   }
