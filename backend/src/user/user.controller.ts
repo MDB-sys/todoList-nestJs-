@@ -8,6 +8,7 @@ import {
   Res,
   Response,
 } from '@nestjs/common';
+import { CreateUserDto } from './user.DTO';
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -20,12 +21,17 @@ export class UserController {
   }
 
   @Post('findOne')
-  @Redirect('findAll')
   async findOne(
     @Body('name') name: string,
-    @Body('id') id: number,
+
     @Res() res: Response,
   ) {
-    return await this.userService.findOne(name, id);
+    return await this.userService.findOne(name);
+  }
+
+  @Post('create')
+  @Redirect('findAll')
+  async create(@Body() createUserDto: CreateUserDto) {
+    return this.userService.create(createUserDto);
   }
 }

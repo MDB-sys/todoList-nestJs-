@@ -18,13 +18,26 @@ export class UserService {
     }
   }
 
-  async findOne(name: string, id: number): Promise<User> {
+  async findOne(name: string): Promise<User> {
     try {
       return await this.userRepository.findOne({
         where: {
           name,
-          id,
         },
+      });
+    } catch (error) {
+      console.log(error);
+      return error.error;
+    }
+  }
+
+  async create(createUserDto) {
+    try {
+      const { name, password } = createUserDto;
+
+      return await this.userRepository.create({
+        name,
+        password,
       });
     } catch (error) {
       console.log(error);
