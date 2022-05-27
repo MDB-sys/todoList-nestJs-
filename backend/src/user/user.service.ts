@@ -44,4 +44,15 @@ export class UserService {
       return error.error;
     }
   }
+
+  async delete(name: string, password: string) {
+    try {
+      return this.userRepository.destroy({
+        where: {
+          name,
+          password,
+        },
+      });
+    } catch (error) {}
+  }
 }

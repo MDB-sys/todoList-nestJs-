@@ -34,4 +34,10 @@ export class UserController {
   async create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
+
+  @Post('delete')
+  @Redirect('findAll')
+  async delete(@Body('name') name: string, @Body('password') password: string) {
+    return this.userService.delete(name, password);
+  }
 }
