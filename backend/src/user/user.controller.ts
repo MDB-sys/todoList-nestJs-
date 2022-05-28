@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   Post,
   Redirect,
   Res,
@@ -21,11 +20,7 @@ export class UserController {
   }
 
   @Post('findOne')
-  async findOne(
-    @Body('name') name: string,
-
-    @Res() res: Response,
-  ) {
+  async findOne(@Body('name') name: string, @Res() res: Response) {
     return await this.userService.findOne(name);
   }
 

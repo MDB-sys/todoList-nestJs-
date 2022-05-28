@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@nestjs/common';
-
 import { User } from './user.entity';
 
 @Injectable()
@@ -34,7 +33,6 @@ export class UserService {
   async create(createUserDto) {
     try {
       const { name, password } = createUserDto;
-
       return await this.userRepository.create({
         name,
         password,
@@ -53,6 +51,9 @@ export class UserService {
           password,
         },
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      return error.error;
+    }
   }
 }
