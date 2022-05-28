@@ -1,6 +1,7 @@
 'use strict';
 
 const constrainUser = require('../constrain/user');
+const validator = require('validator');
 
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
@@ -20,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         validate: {
           isNull: true,
-          isAlphanumeric: true,
+          isAlpha: true,
           len: [4, 8],
         },
       },
@@ -31,5 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'User',
     },
   );
+  console.log(User.name);
   return User;
 };
