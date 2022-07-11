@@ -1,5 +1,5 @@
-// import { ValidationError } from '@nestjs/common';
-import { ValidatorOptions, ValidationError } from 'class-validator';
+import { ValidationError } from '@nestjs/common';
+import { ValidatorOptions } from 'class-validator';
 
 export interface validationPipeOptions extends ValidatorOptions {
   transform?: boolean;

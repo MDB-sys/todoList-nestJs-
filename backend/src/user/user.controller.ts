@@ -4,11 +4,12 @@ import {
   Get,
   Post,
   Redirect,
-  Res,
-  Response,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { CreateUserDto } from './user.DTO';
 import { UserService } from './user.service';
+import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 
 @Controller('users')
 export class UserController {
@@ -20,7 +21,10 @@ export class UserController {
   }
 
   @Post('findOne')
-  async findOne(@Body('name') name: string, @Res() res: Response) {
+  async findOne(
+    @Body('name') name: string,
+    // @Body('password') password: string,
+  ) {
     return await this.userService.findOne(name);
   }
 
@@ -34,5 +38,12 @@ export class UserController {
   @Redirect('findAll')
   async delete(@Body('name') name: string, @Body('password') password: string) {
     return this.userService.delete(name, password);
+  }
+
+  @UseGuards(LocalAuthGuard)
+  @Post('login')
+  async login(@Request() req) {
+    console.log(req);
+    return req.user;
   }
 }
