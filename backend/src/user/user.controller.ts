@@ -10,10 +10,14 @@ import {
 import { CreateUserDto } from './user.DTO';
 import { UserService } from './user.service';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { AuthService } from 'src/auth/auth.service';
 
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Get('findAll')
   async findAll() {
@@ -21,10 +25,7 @@ export class UserController {
   }
 
   @Post('findOne')
-  async findOne(
-    @Body('name') name: string,
-    // @Body('password') password: string,
-  ) {
+  async findOne(@Body('name') name: string) {
     return await this.userService.findOne(name);
   }
 
@@ -43,7 +44,6 @@ export class UserController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
-    console.log(req);
-    return req.user;
+    return this.authService.login(req.user);
   }
 }

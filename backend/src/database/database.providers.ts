@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../user/user.entity';
+// import { hash } from '';
 
 export const databaseProvider = [
   {
@@ -14,6 +15,10 @@ export const databaseProvider = [
         database: 'todoList',
       });
       sequelize.addModels([User]);
+      sequelize.addHook('beforeCreate', 'User', (user, options) => {
+        console.log('ini dari beforeCreate __________________________________');
+        console.log(user);
+      });
       await sequelize.sync();
       return sequelize;
     },

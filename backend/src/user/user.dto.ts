@@ -8,7 +8,7 @@ export class CreateUserDto {
 
   @Validate(CustomePassword, {
     message:
-      'harus di isi dengan huruf kapital huruf kecil simbol dan juga angka',
+      'password harus di isi dengan huruf kapital huruf kecil simbol dan juga angka',
   })
   @IsNotEmpty({ message: 'tidak boleh kosong' })
   password: string;

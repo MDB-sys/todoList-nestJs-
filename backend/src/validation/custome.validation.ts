@@ -19,11 +19,8 @@ export class CustomePassword implements ValidatorConstraintInterface {
       if (!data.length) return false;
 
       for (let i = 0; i < data.length; i++) {
-        if (
-          data[i] === data[i].toUpperCase() &&
-          data[i] === data[i].toLowerCase()
-        ) {
-          symbols = true;
+        if (isNaN(data[i]) === false) {
+          number = true;
         } else if (
           data[i] === data[i].toUpperCase() &&
           data[i] !== data[i].toLowerCase()
@@ -34,8 +31,11 @@ export class CustomePassword implements ValidatorConstraintInterface {
           data[i] === data[i].toLowerCase()
         ) {
           lowerCase = true;
-        } else if (isNaN(data[i]) === false) {
-          number = true;
+        } else if (
+          data[i] === data[i].toUpperCase() &&
+          data[i] === data[i].toLowerCase()
+        ) {
+          symbols = true;
         }
       }
 
@@ -45,6 +45,7 @@ export class CustomePassword implements ValidatorConstraintInterface {
 
       return false;
     };
+
     return password(value);
   }
   defaultMessage(validationArguments?: ValidationArguments): string {
